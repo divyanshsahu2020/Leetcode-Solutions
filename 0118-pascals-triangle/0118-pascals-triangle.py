@@ -1,25 +1,21 @@
-class Solution(object):
-    def generate(self, numRows):
-        # Create an array list to store the output result...
-        output = []
-        for i in range(numRows):
-            if(i == 0):
-                # Create a list to store the prev triangle value for further addition...
-                # Inserting for the first row & store the prev array to the output array...
-                prev = [1]
-                output.append(prev)
-            else:
-                curr = [1]
-                j = 1
-                # Calculate for each of the next values...
-                while(j < i):
-                    # Inserting the addition of the prev arry two values...
-                    curr.append(prev[j-1] + prev[j])
-                    j+=1
-                # Store the number 1...
-                curr.append(1)
-                # Store the value in the Output array...
-                output.append(curr)
-                # Set prev is equal to curr...
-                prev = curr
-        return output       # Return the output list of pascal values...
+class Solution:
+    def generate(self, numRows: int) -> List[List[int]]:
+        curr=[1]
+        ans=[]
+        ans.append(curr)
+        
+        sum=0
+        temp=[]
+        for i in range(numRows-1):
+            summ_arr=[]
+            l=len(curr)
+            for j in range(l-1):
+                sum=curr[j]+curr[j+1]
+                summ_arr.append(sum)
+            curr=[curr[0]]+summ_arr+[curr[-1]]
+            ans.append(curr)
+        return(ans)
+
+
+
+        
