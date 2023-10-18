@@ -1,17 +1,9 @@
 class Solution:
     def containsNearbyDuplicate(self, nums: List[int], k: int) -> bool:
-        dic=dict()
         for i in range(len(nums)):
-            if nums[i] in dic:
-                dic[nums[i]].append(i)
-            else:
-                dic[nums[i]]=[i]
-        for arr in dic.values():
-            if len(arr)>1:
-                for i in range(len(arr)-1):
-                    if abs(arr[i]-arr[i+1])<=k:
-                        return True
-
-            else:
-                continue
+            nums[i]=(nums[i],i)
+        nums.sort()
+        for i in range(len(nums)-1):
+            if nums[i][0]==nums[i+1][0] and abs(nums[i][1]-nums[i+1][1])<=k:
+                return True
         return False
